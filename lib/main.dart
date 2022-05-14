@@ -6,6 +6,8 @@ import 'package:learning_platform/pages/login.dart';
 import 'package:learning_platform/pages/onboarding.dart';
 import 'package:learning_platform/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:learning_platform/pages/quiz.dart';
+import 'package:learning_platform/pages/theory.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/paths': (context) => LearningPathsPage(),
         '/journey': (context) => JourneyPage(),
-        '/paths/journey': (context) => JourneyPage()
+        '/journey/theory': (context) => TheoryPage(),
+        '/paths/journey/theory': (context) => TheoryPage(),
+        '/journey/quiz': (context) => QuizPage(),
+        '/paths/journey/quiz': (context) => QuizPage()
       },
       themeMode: ThemeMode.light,
     );

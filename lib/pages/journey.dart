@@ -30,7 +30,21 @@ class JourneyPage extends StatelessWidget {
           title: Text(task['name']),
           leading: icon,
         ),
-        onPressed: () {},
+        onPressed: () {
+          if (type == 'theory') {
+            Navigator.pushNamed(
+              context,
+              '/journey/theory',
+              arguments: TheoryParameter(task['name'], task['link']),
+            );
+          } else if (type == 'quiz') {
+            Navigator.pushNamed(
+              context,
+              '/journey/quiz',
+              arguments: QuizParameter(task['name'], task['link']),
+            );
+          } else {}
+        },
       ));
     }
 
