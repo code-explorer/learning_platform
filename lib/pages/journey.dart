@@ -82,15 +82,7 @@ class JourneyPage extends StatelessWidget {
             ];
           } else {
             children = const <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text('Loading...'),
-              )
+              Center(child: CircularProgressIndicator())
             ];
           }
 
