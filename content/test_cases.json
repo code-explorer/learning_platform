@@ -1,0 +1,19 @@
+{
+    "id": -1,
+    "test-cases": [
+        {
+            "test-case-id": 0,
+            "input-type": "number",
+            "input": 3,
+            "output-type": "string",
+            "output": "***"
+        },
+        {
+            "test-case-id": 1,
+            "input-type": "array",
+            "input": [1, 2, 3, 4, 5],
+            "output-type": "number",
+            "output": 5
+        }
+    ]
+}

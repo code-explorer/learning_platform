@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +11,14 @@ class OnboardingPage extends StatelessWidget {
         child: ListView(
           children: [
             const ListTile(
-              title: Text('Add onboarding page'),
+              title: Text('Add authentication'),
             ),
             NeumorphicButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.popAndPushNamed(context, '/paths');
               },
-              child: const Text('Sign In / Sign Up'),
-            )
+              child: const Text('Login'),
+            ),
           ],
         ),
       ),

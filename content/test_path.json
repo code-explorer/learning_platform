@@ -1,0 +1,25 @@
+{
+    "id": -1,
+    "name": "Test Learning Path",
+    "description": "Description about this learning path",
+    "content": [
+        {
+            "content-id": 0,
+            "type": "theory",
+            "link": "link/to/content/markdown/file"
+        },
+        {
+            "content-id": 1,
+            "type": "quiz",
+            "link": "link/to/quiz/json/file",
+            "quiz-id": -1
+        },
+        {
+            "content-id": 2,
+            "type": "exercise",
+            "question": "link/to/question/markdown/file",
+            "test-cases": "link/to/test/cases/json/file",
+            "test-cases-id": -1
+        }
+    ]
+}

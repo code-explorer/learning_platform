@@ -1,0 +1,29 @@
+{
+    "id": -1,
+    "questions": [
+        {
+            "question-id": 0,
+            "type": "single-choice",
+            "question": "Details of question",
+            "options": [
+                "Option 1",
+                "Option 2",
+                "Option 3",
+                "Option 4"
+            ],
+            "answer": [2]
+        },
+        {
+            "question-id": 0,
+            "type": "multi-choice",
+            "question": "Details of question",
+            "options": [
+                "Option 1",
+                "Option 2",
+                "Option 3",
+                "Option 4"
+            ],
+            "answer": [1, 3]
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Links to files for all the learning paths",
+    "links": [
+        {
+            "name": "Learning Path 0",
+            "link": "link/to/learning/path/json"
+        },
+        {
+            "name": "Learning Path 1",
+            "link": "link/to/learning/path/json"
+        },
+        {
+            "name": "Learning Path 2",
+            "link": "link/to/learning/path/json"
+        }
+    ]
+}
