@@ -14,9 +14,9 @@ class OnboardingPage extends StatelessWidget {
             ),
             NeumorphicButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/paths');
               },
-              child: const Text('Sign In / Sign Up'),
+              child: const Text('Get Started'),
             )
           ],
         ),
