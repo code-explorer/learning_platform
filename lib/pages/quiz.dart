@@ -68,63 +68,86 @@ class QuizWidget extends StatefulWidget {
 
 class _QuizWidgetState extends State<QuizWidget> {
   List<int> groupValues = List<int>.filled(20, 0);
+  List<List<bool>> checkedValues =
+      List<List<bool>>.filled(20, List<bool>.filled(5, false));
 
   Widget getQuizQuestions() {
     var jsonQuestions = widget.jsonData['questions'];
-    List<Widget> questions = [];
-    for (var question in jsonQuestions) {
-      List<Widget> options = [
-        ListTile(title: Text(question['question'])),
-      ];
-      int i = 1, j = 0;
-      for (var option in question['options']) {
+
+    return PageView.builder(
+      itemCount: jsonQuestions.length,
+      itemBuilder: (context, cardIndex) {
+        var question = jsonQuestions[cardIndex];
         if (question['type'] == "single-choice") {
-          options.add(
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: NeumorphicRadio<int>(
-                child: SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Center(
-                    child: Text(option),
-                  ),
-                ),
-                value: i,
-                groupValue: groupValues[j],
-                onChanged: (int? value) {
-                  setState(() {
-                    groupValues[j] = value ?? -1;
-                  });
-                },
-                padding: const EdgeInsets.all(2),
-              ),
+          return Neumorphic(
+            child: ListView.builder(
+              itemCount: question['options'].length + 2,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return ListTile(title: Text(question['question']));
+                } else if (index == question['options'].length + 1) {
+                  return NeumorphicButton(
+                    child: const Text('Check Answer'),
+                    onPressed: () {},
+                    style: const NeumorphicStyle(color: Colors.blue),
+                  );
+                }
+                return RadioListTile<int>(
+                  value: index + 1,
+                  groupValue: groupValues[cardIndex],
+                  onChanged: (value) {
+                    setState(() {
+                      groupValues[cardIndex] = value ?? 0;
+                    });
+                  },
+                  title: Text(question['options'][index - 1]),
+                );
+              },
             ),
+            style: NeumorphicStyle(
+              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+              depth: 8,
+              lightSource: LightSource.topLeft,
+              color: Colors.grey.shade50,
+            ),
+            margin: const EdgeInsets.all(20),
           );
-          i++;
-        } else {}
-      }
-      // j++;
-
-      questions.add(
-        Neumorphic(
-          child: ListView(
-            children: options,
-          ),
-          style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            depth: 8,
-            lightSource: LightSource.topLeft,
-            color: Colors.grey.shade50,
-          ),
-          margin: const EdgeInsets.all(20),
-        ),
-      );
-    }
-
-    return PageView(
-      controller: PageController(viewportFraction: 0.9),
-      children: questions,
+        } else {
+          return Neumorphic(
+            child: ListView.builder(
+              itemCount: question['options'].length + 2,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return ListTile(title: Text(question['question']));
+                } else if (index == question['options'].length + 1) {
+                  return NeumorphicButton(
+                    child: const Text('Check Answer'),
+                    onPressed: () {},
+                    style: const NeumorphicStyle(color: Colors.blue),
+                  );
+                }
+                return CheckboxListTile(
+                  value: checkedValues[cardIndex][index - 1],
+                  onChanged: (newValue) {
+                    setState(() {
+                      checkedValues[cardIndex][index - 1] = newValue ?? false;
+                    });
+                  },
+                  title: Text(question['options'][index - 1]),
+                );
+              },
+            ),
+            style: NeumorphicStyle(
+              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+              depth: 8,
+              lightSource: LightSource.topLeft,
+              color: Colors.grey.shade50,
+            ),
+            margin: const EdgeInsets.all(20),
+          );
+        }
+      },
+      controller: PageController(viewportFraction: 0.95),
     );
   }
 
