@@ -1,6 +1,8 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
+import 'package:learning_platform/widgets/appbar.dart';
 
 class JourneyPage extends StatelessWidget {
   LearningPathParameter? parameter;
@@ -25,9 +27,9 @@ class JourneyPage extends StatelessWidget {
       }
 
       tasks.add(NeumorphicButton(
-        child: ListTile(
-          title: Text(task['name']),
-          leading: icon,
+        child: GFListTile(
+          titleText: task['name'],
+          icon: icon,
         ),
         onPressed: () {
           if (type == 'theory') {
@@ -57,54 +59,46 @@ class JourneyPage extends StatelessWidget {
     parameter = args;
 
     return Scaffold(
-      appBar: NeumorphicAppBar(
-        title: Text(args.name),
-        centerTitle: true,
-        actions: [
-          NeumorphicButton(
-            child: const Icon(Icons.exit_to_app),
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-            },
-          )
-        ],
-      ),
-      body: FutureBuilder<List<Widget>>(
-        builder: ((context, snapshot) {
-          List<Widget> children;
-          if (snapshot.hasData) {
-            children = snapshot.data!;
-          } else if (snapshot.hasError) {
-            children = <Widget>[
-              const Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text('Error: ${snapshot.error}'),
-              )
-            ];
-          } else {
-            children = const <Widget>[
-              Center(child: CircularProgressIndicator())
-            ];
-          }
+        backgroundColor: const Color.fromRGBO(202, 240, 248, 1),
+        appBar: getAppBar(context, args.name),
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: FutureBuilder<List<Widget>>(
+            builder: ((context, snapshot) {
+              List<Widget> children;
+              if (snapshot.hasData) {
+                children = snapshot.data!;
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text('Error: ${snapshot.error}'),
+                  )
+                ];
+              } else {
+                children = const <Widget>[
+                  Center(child: CircularProgressIndicator())
+                ];
+              }
 
-          return ListView.separated(
-            shrinkWrap: true,
-            itemCount: children.length,
-            itemBuilder: ((context, index) {
-              return children[index];
+              return ListView.separated(
+                shrinkWrap: true,
+                itemCount: children.length,
+                itemBuilder: ((context, index) {
+                  return children[index];
+                }),
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 10);
+                },
+              );
             }),
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 10);
-            },
-          );
-        }),
-        future: getJourneyTasks(context),
-      ),
-    );
+            future: getJourneyTasks(context),
+          ),
+        ));
   }
 }

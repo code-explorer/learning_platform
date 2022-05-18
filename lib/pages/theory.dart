@@ -2,6 +2,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
+import 'package:learning_platform/widgets/appbar.dart';
 
 class TheoryPage extends StatelessWidget {
   TheoryParameter? parameter;
@@ -19,19 +20,7 @@ class TheoryPage extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as TheoryParameter;
     parameter = args;
     return Scaffold(
-      appBar: NeumorphicAppBar(
-        title: Text(args.name),
-        centerTitle: true,
-        actions: [
-          NeumorphicButton(
-            child: const Icon(Icons.exit_to_app),
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-            },
-          )
-        ],
-        
-      ),
+      appBar: getAppBar(context, args.name),
       body: FutureBuilder<String>(
         builder: (context, snapshot) {
           if (snapshot.hasData) {

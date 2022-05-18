@@ -1,6 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
+import 'package:learning_platform/widgets/appbar.dart';
 
 class QuizPage extends StatelessWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -9,18 +10,7 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as QuizParameter;
     return Scaffold(
-      appBar: NeumorphicAppBar(
-        title: Text(args.name),
-        centerTitle: true,
-        actions: [
-          NeumorphicButton(
-            child: const Icon(Icons.exit_to_app),
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-            },
-          )
-        ],
-      ),
+      appBar: getAppBar(context, args.name),
       body: FutureBuilder<Map<String, dynamic>>(
         future: getJsonData(args.url),
         builder: (context, snapshot) {
