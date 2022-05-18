@@ -3,9 +3,8 @@ import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
 
 class LearningPathsPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  LearningPathsPage({Key? key}) : super(key: key);
+  const LearningPathsPage({Key? key}) : super(key: key);
 
   Future<List<Widget>> getLearningPaths(BuildContext context) async {
     String url =
@@ -36,7 +35,6 @@ class LearningPathsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: NeumorphicAppBar(
         title: const Text('Learning Paths'),
         centerTitle: true,
@@ -48,24 +46,7 @@ class LearningPathsPage extends StatelessWidget {
             },
           )
         ],
-        leading: NeumorphicButton(
-          child: const Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            NeumorphicButton(
-              child: Row(children: const [
-                Icon(Icons.settings),
-                Text('Settings'),
-              ]),
-            )
-          ],
-        ),
+        leading: null,
       ),
       body: FutureBuilder<List<Widget>>(
         builder: ((context, snapshot) {

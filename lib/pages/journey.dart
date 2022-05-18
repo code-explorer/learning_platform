@@ -3,7 +3,6 @@ import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
 
 class JourneyPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   LearningPathParameter? parameter;
 
   JourneyPage({Key? key}) : super(key: key);
@@ -58,7 +57,6 @@ class JourneyPage extends StatelessWidget {
     parameter = args;
 
     return Scaffold(
-      key: _scaffoldKey,
       appBar: NeumorphicAppBar(
         title: Text(args.name),
         centerTitle: true,
@@ -70,12 +68,6 @@ class JourneyPage extends StatelessWidget {
             },
           )
         ],
-        leading: NeumorphicButton(
-          child: const Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
       ),
       body: FutureBuilder<List<Widget>>(
         builder: ((context, snapshot) {
@@ -112,18 +104,6 @@ class JourneyPage extends StatelessWidget {
           );
         }),
         future: getJourneyTasks(context),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            NeumorphicButton(
-              child: Row(children: const [
-                Icon(Icons.settings),
-                Text('Settings'),
-              ]),
-            )
-          ],
-        ),
       ),
     );
   }

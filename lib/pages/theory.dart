@@ -4,7 +4,6 @@ import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
 
 class TheoryPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TheoryParameter? parameter;
 
   Future<String> getMarkdownFile() async {
@@ -20,7 +19,6 @@ class TheoryPage extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as TheoryParameter;
     parameter = args;
     return Scaffold(
-      key: _scaffoldKey,
       appBar: NeumorphicAppBar(
         title: Text(args.name),
         centerTitle: true,
@@ -32,12 +30,7 @@ class TheoryPage extends StatelessWidget {
             },
           )
         ],
-        leading: NeumorphicButton(
-          child: const Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
+        
       ),
       body: FutureBuilder<String>(
         builder: (context, snapshot) {

@@ -3,15 +3,12 @@ import 'package:learning_platform/tools/parameters.dart';
 import 'package:learning_platform/tools/retriever.dart';
 
 class QuizPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  QuizPage({Key? key}) : super(key: key);
+  const QuizPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as QuizParameter;
     return Scaffold(
-      key: _scaffoldKey,
       appBar: NeumorphicAppBar(
         title: Text(args.name),
         centerTitle: true,
@@ -23,12 +20,6 @@ class QuizPage extends StatelessWidget {
             },
           )
         ],
-        leading: NeumorphicButton(
-          child: const Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: getJsonData(args.url),

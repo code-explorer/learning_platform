@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const OnboardingPage(),
-        '/paths': (context) => LearningPathsPage(),
+        '/paths': (context) => const LearningPathsPage(),
         '/journey': (context) => JourneyPage(),
         '/journey/theory': (context) => TheoryPage(),
         '/paths/journey/theory': (context) => TheoryPage(),
-        '/journey/quiz': (context) => QuizPage(),
-        '/paths/journey/quiz': (context) => QuizPage()
+        '/journey/quiz': (context) => const QuizPage(),
+        '/paths/journey/quiz': (context) => const QuizPage()
       },
       themeMode: ThemeMode.light,
     );
